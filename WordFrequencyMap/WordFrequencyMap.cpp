@@ -5,7 +5,10 @@
 
 #include "stdafx.h"
 #include <map>
-
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <regex>
 // Adds words to map, counts frequency
 void frequencyCount(std::map <std::string,int> &map, std::string word) // Pass by reference to improve performance
 {
@@ -19,11 +22,26 @@ void frequencyCount(std::map <std::string,int> &map, std::string word) // Pass b
 
 int main()
 {
+	// Note: file to read can't have a BOM. If you need to remove it, use notepad++
+	std::string docToRead = "WarOfTheWorldsExcerpt.txt"; // Must be in same directory as cpp file
 	std::map <std::string, int> wordMap;
-	frequencyCount(wordMap,"ham");
-	frequencyCount(wordMap, "cheese");
-	frequencyCount(wordMap, "ham");
-	frequencyCount(wordMap, "eggs");
+	std::string word;
+	std::string wordNoPunct;
+	std::ifstream file;
+	file.open(docToRead);
+	if (!file.is_open())
+	{
+		std::cout << "Unable to open file. Is " << docToRead << " in the same directory as WordFrequencyMap.cpp?";
+	}
+	while (file >> word)
+	{
+		word.erase(std::remove_if(word.begin(), word.end(), ispunct), word.end()); // Removes punctuation
+		if (word != "") // Prevents issues when just punctuation was grabbed
+		{
+			word[0] = tolower(word[0]); // Ensures first letter of word is lower case
+			frequencyCount(wordMap, word);
+		}	
+	}
     return 0;
 }
 
