@@ -14,12 +14,7 @@
 // Adds words to map, counts frequency
 void frequencyCount(std::map <std::string,int> &map, std::string word) // Pass by reference to improve performance
 {
-	std::pair<std::map<std::string, int>::iterator, bool> flag; // Holds return value from insert
-	flag = map.insert(std::pair<std::string, int>(word, 1)); // Attempts to insert word with initial value of 1
-	if (!flag.second) // flag.second will be false if word is already in map
-	{
 		map[word] ++; // Increments word count
-	}
 }
 
 // Checks if value of digits in string A is greater then the value of digits in string B
