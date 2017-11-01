@@ -1,4 +1,6 @@
-# This program counts unique words in txt files and outputs the results sorted alphabetically and by number of occurances
+# WordFrequencyMap
+
+### This program counts unique words in txt files and outputs the results sorted alphabetically and by number of occurances
 
 Place any txt files you would like to analyze in the WordFrequencyMap directory. If an output file is created, it will be placed in the same directory (output.filename)
 
